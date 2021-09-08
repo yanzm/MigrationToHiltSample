@@ -1,0 +1,19 @@
+# Android Studio
+.idea/*
+!.idea/codeStyles
+!.idea/runConfigurations
+.navigation/
+captures/
+*.iml
+*.ipr
+*.iws
+
+# Gradle
+.gradle/
+build/
+proguard/
+*/build/
+local.properties
+
+# macOS
+.DS_Store
