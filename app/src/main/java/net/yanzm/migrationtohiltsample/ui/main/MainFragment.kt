@@ -1,6 +1,5 @@
 package net.yanzm.migrationtohiltsample.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +8,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import dagger.android.support.AndroidSupportInjection
+import dagger.hilt.android.AndroidEntryPoint
 import net.yanzm.migrationtohiltsample.network.IdStore
 import net.yanzm.migrationtohiltsample.ui.DialogSupport
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     @Inject
@@ -21,11 +21,6 @@ class MainFragment : Fragment() {
 
     @Inject
     lateinit var idStore: IdStore
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

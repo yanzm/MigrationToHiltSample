@@ -2,17 +2,12 @@ package net.yanzm.migrationtohiltsample.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import dagger.android.*
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
-
-    // この中の Map には AndroidInjector<MainActivity> と AndroidInjector<MainFragment> がいる
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
@@ -20,9 +15,5 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 .replace(android.R.id.content, MainFragment())
                 .commit()
         }
-    }
-
-    override fun androidInjector(): AndroidInjector<Any> {
-        return androidInjector
     }
 }
