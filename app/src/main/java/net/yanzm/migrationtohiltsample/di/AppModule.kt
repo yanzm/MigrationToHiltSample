@@ -1,19 +1,22 @@
 package net.yanzm.migrationtohiltsample.di
 
-import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
-import net.yanzm.migrationtohiltsample.MyApplication
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import net.yanzm.migrationtohiltsample.network.DefaultIdStore
 import net.yanzm.migrationtohiltsample.network.IdStore
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class AppModule {
 
     @Singleton
     @Provides
-    fun provideIdStore(application: Application): IdStore {
-        return DefaultIdStore(application)
+    fun provideIdStore(@ApplicationContext context: Context): IdStore {
+        return DefaultIdStore(context)
     }
 }
