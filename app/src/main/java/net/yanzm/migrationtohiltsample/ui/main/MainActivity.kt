@@ -1,8 +1,12 @@
 package net.yanzm.migrationtohiltsample.ui.main
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import dagger.android.*
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
@@ -10,6 +14,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     // この中の Map には AndroidInjector<MainActivity> と AndroidInjector<MainFragment> がいる
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+    @Inject
+    lateinit var viewModelFactory: MainViewModel.Factory
+
+    private val mainViewModel: MainViewModel by viewModels<MainViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -20,6 +29,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 .replace(android.R.id.content, MainFragment())
                 .commit()
         }
+
+        println(mainViewModel.getId())
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
